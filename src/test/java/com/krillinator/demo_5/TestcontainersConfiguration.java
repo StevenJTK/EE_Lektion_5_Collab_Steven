@@ -20,4 +20,11 @@ class TestcontainersConfiguration {
 		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 	}
 
+	// Added this as an attempt to fix my docker issue - It wasn't helpful.
+	static {
+		System.setProperty("DOCKER_HOST", "tcp://localhost:2375");
+
+		System.setProperty("TESTCONTAINERS_RYUK_DISABLED", "true");
+	}
+
 }
