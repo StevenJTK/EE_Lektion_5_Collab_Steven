@@ -22,7 +22,7 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
     @BeforeEach
     void clearDatabase() {
-        productRepository.deleteAll();
+        productRepository.deleteAll().block();
     }
     @Test
     void shouldCreateProductAndRetrieveIt() {
@@ -32,7 +32,7 @@ public class ProductServiceTest {
                 BigDecimal.valueOf(19.99),
                 false
         );
-        // Similar Logic to Repository
+
         StepVerifier.create(
                         productService.createNewProduct(productValidatorDTO)
                                 .flatMap(product -> productRepository.findById(product.id()))
